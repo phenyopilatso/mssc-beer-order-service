@@ -11,8 +11,8 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2020-10-20T14:38:14+0200",
-    comments = "version: 1.3.0.Final, compiler: javac, environment: Java 11.0.8 (N/A)"
+    date = "2020-10-22T11:03:56+0200",
+    comments = "version: 1.3.0.Final, compiler: javac, environment: Java 11.0.8 (Oracle Corporation)"
 )
 @Component
 @Qualifier("delegate")
