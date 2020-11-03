@@ -19,6 +19,7 @@ import java.util.EnumSet;
 public class BeerOrderStatemachineConfig extends StateMachineConfigurerAdapter<BeerOrderStatusEnum, BeerOrderEventEnum> {
 
     private final Action<BeerOrderStatusEnum, BeerOrderEventEnum> validateOrderAction;
+    private final Action<BeerOrderStatusEnum, BeerOrderEventEnum> allocateOrderAction;
 
     @Override
     public void configure(StateMachineStateConfigurer<BeerOrderStatusEnum, BeerOrderEventEnum> states) throws Exception {
@@ -43,6 +44,10 @@ public class BeerOrderStatemachineConfig extends StateMachineConfigurerAdapter<B
                 .event(BeerOrderEventEnum.VALIDATION_PASSED)
             .and().withExternal()
                 .source(BeerOrderStatusEnum.NEW).target(BeerOrderStatusEnum.VALIDATION_EXCEPTION)
-                .event(BeerOrderEventEnum.VALIDATION_FAILED);
+                .event(BeerOrderEventEnum.VALIDATION_FAILED)
+            .and().withExternal()
+                .source(BeerOrderStatusEnum.VALIDATED).target(BeerOrderStatusEnum.ALLOCATION_PENDING)
+                .event(BeerOrderEventEnum.ALLOCATE_ORDER)
+                .action(allocateOrderAction);
     }
 }
