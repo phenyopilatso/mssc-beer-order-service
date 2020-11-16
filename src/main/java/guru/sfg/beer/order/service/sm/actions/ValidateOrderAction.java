@@ -36,7 +36,7 @@ public class ValidateOrderAction implements Action<BeerOrderStatusEnum, BeerOrde
 
         beerOrderOptional.ifPresentOrElse(beerOrder -> {
             jmsTemplate.convertAndSend(JmsConfig.VALIDATE_ORDER_QUEUE, ValidateOrderRequest.builder()
-                    .beerOrderDto(beerOrderMapper.beerOrderToDto(beerOrder)).build());
+                    .beerOrder(beerOrderMapper.beerOrderToDto(beerOrder)).build());
 
         }, () -> log.error("Order Not Found. Id: " + beerOrderId));
 
